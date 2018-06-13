@@ -11,13 +11,14 @@ import java.util.Map;
 
 public class User {
 
-    private String username, email, password, dob, sex, home, init_weight, target_weight;
+    private String uid, username, email, password, dob, sex, home, init_weight, target_weight;
 
     public User() {
         // Empty constructor
     }
 
-    public User(String username, String email, String pass, String dob, String sex, String home, String init_weight, String target_weight) {
+    public User(String uid, String username, String email, String pass, String dob, String sex, String home, String init_weight, String target_weight) {
+        this.uid = uid;
         this.username = username;
         this.email = email;
         this.password = pass;
@@ -27,6 +28,8 @@ public class User {
         this.init_weight = init_weight;
         this.target_weight = target_weight;
     }
+
+    public String getUid() { return this.uid; }
 
     public String getUsername() { return this.username; }
 
@@ -43,6 +46,8 @@ public class User {
     public String getInit_weight() { return this.init_weight; }
 
     public String getTarget_weight() { return this.target_weight; }
+
+    public void setUid( String uid ) { this.uid = uid; }
 
     public void setUsername( String username ) { this.username = username; }
 
@@ -63,6 +68,7 @@ public class User {
     @Exclude
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
+        result.put("uid", this.uid );
         result.put("username", this.username);
         result.put("email", this.email);
         result.put("password", this.password);

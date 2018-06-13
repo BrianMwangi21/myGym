@@ -53,7 +53,6 @@ public class SignUpActivity extends AppCompatActivity {
 
         if( !username.isEmpty() && !email.isEmpty() && !pass.isEmpty() && !dob.isEmpty() ) {
             signUpBtn.setProgress(1);
-            User user = new User( username, email, pass, dob, gender, "", "", "" );
 
             // Init firebase
             if( userExists(email) ) {
@@ -61,15 +60,21 @@ public class SignUpActivity extends AppCompatActivity {
             }else {
                 mDatabase = FirebaseDatabase.getInstance().getReference("users");
                 String userID = mDatabase.push().getKey();
+                User user = new User( userID,username, email, pass, dob, gender, "", "", "" );
 
                 mDatabase.child(userID).setValue(user, new DatabaseReference.CompletionListener() {
                     @Override
                     public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                         if( databaseError == null ) {
                             signUpBtn.setProgress(100);
-                            Toast.makeText( SignUpActivity.this, "Done!", Toast.LENGTH_SHORT ).show();
 
-                            // Proceed to home
+                            // Go to home immediately
+                            Intent intent = new Intent(SignUpActivity.this, MainActivity.class );
+                            Bundle extras = new Bundle();
+                            extras.putString("username", usernameET.getText().toString());
+                            extras.putString("email", emailET.getText().toString());
+                            intent.putExtras( extras );
+                            startActivity(intent);
                         }else {
                             Toast.makeText( SignUpActivity.this, "Something went wrong! Try again", Toast.LENGTH_SHORT ).show();
                             signUpBtn.setProgress(0);

@@ -105,36 +105,15 @@ public class ProfileActivity extends AppCompatActivity {
 
     public void saveChanges() {
         mDatabase = FirebaseDatabase.getInstance().getReference("users");
-        Query query = mDatabase.orderByChild("email").equalTo(email);
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
+        user.setUsername( usernameET.getText().toString() );
+        user.setHome( homeET.getText().toString() );
+        user.setInit_weight( initWET.getText().toString() );
+        user.setTarget_weight( targetWET.getText().toString() );
+        mDatabase.child(user.getUid()).setValue(user, new DatabaseReference.CompletionListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for( DataSnapshot childSnapshot : dataSnapshot.getChildren() ) {
-                    String userID = childSnapshot.getKey();
-
-                    Toast.makeText(ProfileActivity.this, userID, Toast.LENGTH_SHORT).show();
-
-                    /**
-                    mDatabase.child(userID);
-                    user.setUsername( usernameET.getText().toString() );
-                    user.setHome( homeET.getText().toString() );
-                    user.setInit_weight( initWET.getText().toString() );
-                    user.setTarget_weight( targetWET.getText().toString() );
-
-                    Map<String, Object> new_values = user.toMap();
-                    mDatabase.updateChildren(new_values, new DatabaseReference.CompletionListener() {
-                        @Override
-                        public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-                            Toast.makeText( ProfileActivity.this, "Completed", Toast.LENGTH_SHORT ).show();
-                        }
-                    });
-                     **/
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText( ProfileActivity.this, "Ref cancelled", Toast.LENGTH_SHORT ).show();
+            public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                saveBtn.setProgress(0);
+                Toast.makeText( ProfileActivity.this, "Update successful", Toast.LENGTH_SHORT ).show();
             }
         });
     }

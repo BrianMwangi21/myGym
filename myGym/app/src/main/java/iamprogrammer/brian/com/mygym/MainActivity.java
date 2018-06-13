@@ -2,6 +2,7 @@ package iamprogrammer.brian.com.mygym;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -17,11 +18,19 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     TextView mainTitle, subTitle;
     Bundle extras;
+    DatabaseReference mDatabase;
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +55,33 @@ public class MainActivity extends AppCompatActivity
 
         // Get views
         mainTitle = headerView.findViewById(R.id.navbar_title);
-        mainTitle.setText(extras.getString("username"));
         subTitle = headerView.findViewById(R.id.navbar_subtitle);
         subTitle.setText(extras.getString("email"));
+        getUserData( extras.getString("email") );
+    }
+
+    public void getUserData( String email ) {
+        mDatabase = FirebaseDatabase.getInstance().getReference("users");
+        mDatabase.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if( dataSnapshot.exists() ) {
+                    for( DataSnapshot childSnapshot : dataSnapshot.getChildren() ) {
+                        user = childSnapshot.getValue(User.class);
+
+                        // Populate the data
+                        mainTitle.setText( user.getUsername() );
+                    }
+                }else {
+                    Toast.makeText( MainActivity.this, "Email not found", Toast.LENGTH_SHORT ).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText( MainActivity.this, "Ref cancelled", Toast.LENGTH_SHORT ).show();
+            }
+        });
     }
 
     @Override
