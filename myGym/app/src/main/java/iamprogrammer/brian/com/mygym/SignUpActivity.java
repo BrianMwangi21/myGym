@@ -1,5 +1,6 @@
 package iamprogrammer.brian.com.mygym;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,14 +11,16 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.dd.processbutton.iml.ActionProcessButton;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class SignUpActivity extends AppCompatActivity {
 
     String gender = "male";
-    EditText emailET, passET, dobET;
+    EditText usernameET, emailET, passET, dobET;
     ActionProcessButton signUpBtn;
     DatabaseReference mDatabase;
 
@@ -27,6 +30,7 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
 
         // Find views
+        usernameET = findViewById(R.id.edittext_username_signup);
         emailET = findViewById(R.id.edittext_email_signup);
         passET = findViewById(R.id.edittext_password_signup);
         dobET = findViewById(R.id.edittext_dob);
@@ -42,32 +46,37 @@ public class SignUpActivity extends AppCompatActivity {
 
     public void registerUser() {
         // Check if null
+        String username = usernameET.getText().toString();
         String email = emailET.getText().toString();
         String pass = passET.getText().toString();
         String dob = dobET.getText().toString();
 
-        if( !email.isEmpty() && !pass.isEmpty() && !dob.isEmpty() ) {
+        if( !username.isEmpty() && !email.isEmpty() && !pass.isEmpty() && !dob.isEmpty() ) {
             signUpBtn.setProgress(1);
-            User user = new User( email, pass, dob, gender );
+            User user = new User( username, email, pass, dob, gender, "", "", "" );
 
             // Init firebase
-            mDatabase = FirebaseDatabase.getInstance().getReference("users");
-            String userID = mDatabase.push().getKey();
+            if( userExists(email) ) {
+                Toast.makeText( SignUpActivity.this, "User already exists", Toast.LENGTH_SHORT ).show();
+            }else {
+                mDatabase = FirebaseDatabase.getInstance().getReference("users");
+                String userID = mDatabase.push().getKey();
 
-            mDatabase.child(userID).setValue(user, new DatabaseReference.CompletionListener() {
-                @Override
-                public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-                    if( databaseError == null ) {
-                        signUpBtn.setProgress(100);
-                        Toast.makeText( SignUpActivity.this, "Done!", Toast.LENGTH_SHORT ).show();
+                mDatabase.child(userID).setValue(user, new DatabaseReference.CompletionListener() {
+                    @Override
+                    public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                        if( databaseError == null ) {
+                            signUpBtn.setProgress(100);
+                            Toast.makeText( SignUpActivity.this, "Done!", Toast.LENGTH_SHORT ).show();
 
-                        // Proceed to home
-                    }else {
-                        Toast.makeText( SignUpActivity.this, "Something went wrong! Try again", Toast.LENGTH_SHORT ).show();
-                        signUpBtn.setProgress(0);
+                            // Proceed to home
+                        }else {
+                            Toast.makeText( SignUpActivity.this, "Something went wrong! Try again", Toast.LENGTH_SHORT ).show();
+                            signUpBtn.setProgress(0);
+                        }
                     }
-                }
-            });
+                });
+            }
         }else {
             Toast.makeText( this, "Fill all fields", Toast.LENGTH_SHORT ).show();
         }
@@ -88,5 +97,27 @@ public class SignUpActivity extends AppCompatActivity {
                     gender = "female";
                 break;
         }
+    }
+
+    boolean exists = false;
+    public boolean userExists(String email) {
+        mDatabase = FirebaseDatabase.getInstance().getReference("users");
+        mDatabase.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if( dataSnapshot.exists() ) {
+                    exists = true;
+                }else {
+                    exists = false;
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText( SignUpActivity.this, "Ref cancelled", Toast.LENGTH_SHORT ).show();
+            }
+        });
+
+        return exists;
     }
 }

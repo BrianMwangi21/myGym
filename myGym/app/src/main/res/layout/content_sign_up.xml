@@ -20,6 +20,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="20px"
+        android:id="@+id/edittext_username_signup"
+        android:hint="Username"
+        android:inputType="textCapSentences"
+        android:textColor="#000"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="20px"
         android:id="@+id/edittext_email_signup"
         android:hint="Email address"
         android:inputType="textEmailAddress"
