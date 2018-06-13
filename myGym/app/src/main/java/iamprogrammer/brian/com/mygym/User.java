@@ -1,5 +1,10 @@
 package iamprogrammer.brian.com.mygym;
 
+import com.google.firebase.database.Exclude;
+
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by ADMIN on 6/8/2018.
  */
@@ -54,5 +59,21 @@ public class User {
     public void setInit_weight( String init_weight ) { this.init_weight = init_weight; }
 
     public void setTarget_weight( String target_weight ) { this.target_weight = target_weight; }
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("username", this.username);
+        result.put("email", this.email);
+        result.put("password", this.password);
+        result.put("dob", this.dob);
+        result.put("sex", this.sex);
+        result.put("home", this.home);
+        result.put("init_weight", this.init_weight);
+        result.put("target_weight", this.target_weight);
+
+        return result;
+    }
+
 
 }

@@ -3,6 +3,7 @@ package iamprogrammer.brian.com.mygym;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -111,25 +112,23 @@ public class ProfileActivity extends AppCompatActivity {
                 for( DataSnapshot childSnapshot : dataSnapshot.getChildren() ) {
                     String userID = childSnapshot.getKey();
 
+                    Toast.makeText(ProfileActivity.this, userID, Toast.LENGTH_SHORT).show();
+
+                    /**
                     mDatabase.child(userID);
-                    Map<String,User> taskMap = new HashMap<>();
                     user.setUsername( usernameET.getText().toString() );
                     user.setHome( homeET.getText().toString() );
                     user.setInit_weight( initWET.getText().toString() );
                     user.setTarget_weight( targetWET.getText().toString() );
-                    taskMap.put( userID, user );
-                    mDatabase.setValue(taskMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+                    Map<String, Object> new_values = user.toMap();
+                    mDatabase.updateChildren(new_values, new DatabaseReference.CompletionListener() {
                         @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if( task.isSuccessful() ) {
-                                saveBtn.setProgress(0);
-                                Toast.makeText( ProfileActivity.this, "Updated successfully", Toast.LENGTH_SHORT ).show();
-                            }else {
-                                saveBtn.setProgress(0);
-                                Toast.makeText( ProfileActivity.this, "Update failed! Try again", Toast.LENGTH_SHORT ).show();
-                            }
+                        public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                            Toast.makeText( ProfileActivity.this, "Completed", Toast.LENGTH_SHORT ).show();
                         }
                     });
+                     **/
                 }
             }
 
