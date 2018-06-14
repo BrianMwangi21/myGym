@@ -103,7 +103,10 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_gyms) {
-            // Handle the camera action
+            // Go to profile
+            Intent intent = new Intent(MainActivity.this, GymActivity.class);
+            intent.putExtras( extras );
+            startActivity( intent );
         } else if (id == R.id.nav_sessions) {
 
         } else if (id == R.id.nav_profile) {
