@@ -18,6 +18,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.scottyab.aescrypt.AESCrypt;
 
 import javax.security.auth.login.LoginException;
 
@@ -48,6 +49,13 @@ public class LogInActivity extends AppCompatActivity {
     public void verifyCredentials() {
         if( !emailET.getText().toString().isEmpty() && !passET.getText().toString().isEmpty() ) {
             loginBtn.setProgress(1);
+            String pass;
+
+            try {
+                pass = AESCrypt.encrypt(passET.getText().toString(), emailET.getText().toString());
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
 
             mDatabase = FirebaseDatabase.getInstance().getReference("users");
             mDatabase.orderByChild("email").equalTo(emailET.getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {

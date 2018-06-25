@@ -16,6 +16,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.scottyab.aescrypt.AESCrypt;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -58,6 +59,11 @@ public class SignUpActivity extends AppCompatActivity {
             if( userExists(email) ) {
                 Toast.makeText( SignUpActivity.this, "User already exists", Toast.LENGTH_SHORT ).show();
             }else {
+                try {
+                    pass = AESCrypt.encrypt(pass, email);
+                }catch (Exception e) {
+                    e.printStackTrace();
+                }
                 mDatabase = FirebaseDatabase.getInstance().getReference("users");
                 String userID = mDatabase.push().getKey();
                 User user = new User( userID,username, email, pass, dob, gender, "", "", "" );

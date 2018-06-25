@@ -1,5 +1,6 @@
 package iamprogrammer.brian.com.mygym;
 
+import static iamprogrammer.brian.com.mygym.AppConfig.*;
 import android.*;
 import android.Manifest;
 import android.content.Context;
@@ -11,7 +12,14 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.places.GeoDataClient;
@@ -25,6 +33,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class GymActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -67,11 +79,6 @@ public class GymActivity extends FragmentActivity implements OnMapReadyCallback 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(1.29, 36.82);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Nairobi"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
         // Manenos
         getLocationPermission();
@@ -128,9 +135,8 @@ public class GymActivity extends FragmentActivity implements OnMapReadyCallback 
                         if (task.isSuccessful()) {
                             // Set the map's camera position to the current location of the device.
                             mLastKnownLocation = task.getResult();
-                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                                    new LatLng(mLastKnownLocation.getLatitude(),
-                                            mLastKnownLocation.getLongitude()), DEFAULT_ZOOM));
+                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude()), DEFAULT_ZOOM));
+                            getCloseGyms();
                         } else {
                             Log.d(TAG, "Current location is null. Using defaults.");
                             Log.e(TAG, "Exception: %s", task.getException());
@@ -142,6 +148,51 @@ public class GymActivity extends FragmentActivity implements OnMapReadyCallback 
             }
         } catch(SecurityException e)  {
             Log.e("Exception: %s", e.getMessage());
+        }
+    }
+
+    public void getCloseGyms() {
+        StringBuilder googlePlacesUrl = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
+        googlePlacesUrl.append("location=").append(mLastKnownLocation.getLatitude()).append(",").append(mLastKnownLocation.getLongitude());
+        googlePlacesUrl.append("&radius=").append(50000);
+        googlePlacesUrl.append("&types=").append("gym");
+        googlePlacesUrl.append("&sensor=true");
+        googlePlacesUrl.append("&key=" + GOOGLE_BROWSER_API_KEY);
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET,googlePlacesUrl.toString(),null,
+            new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject result) {
+                    Toast.makeText( GymActivity.this, result.toString(), Toast.LENGTH_SHORT ).show();
+                    parseLocationResult(result);
+                }
+            },
+            new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText( GymActivity.this, error.getMessage(), Toast.LENGTH_SHORT ).show();
+                }
+            }
+        );
+        AppController.getInstance().addToRequestQueue(request);
+    }
+
+    public void parseLocationResult(JSONObject result) {
+        try {
+            JSONArray jsonArray = result.getJSONArray(RESULTS);
+
+            if (result.getString(STATUS).equalsIgnoreCase(OK)) {
+                mMap.clear();
+
+                for (int i = 0; i < 5; i++) {
+                    JSONObject place = jsonArray.getJSONObject(i);
+                    Toast.makeText( GymActivity.this, place.getString(NAME), Toast.LENGTH_SHORT ).show();
+                }
+            } else if (result.getString("STATUS").equalsIgnoreCase("ZERO_RESULTS")) {
+                Toast.makeText( GymActivity.this, "No gyms available", Toast.LENGTH_LONG).show();
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 }
