@@ -61,8 +61,14 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".GymActivity"
-            android:label="@string/title_activity_gym"></activity>
+            android:name=".GymsActivity"
+            android:label="@string/title_activity_gyms"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="iamprogrammer.brian.com.mygym.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

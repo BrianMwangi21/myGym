@@ -24,10 +24,9 @@ public final class AppConfig {
     public static final String REFERENCE = "reference";
     public static final String VICINITY = "vicinity";
     public static final String PLACE_NAME = "place_name";
-    public static final String GOOGLE_BROWSER_API_KEY =
-            "AIzaSyB-tBe7PtYlD1hiZp16vb04b_mFRDE0YRc";
+    public static final String GOOGLE_BROWSER_API_KEY = "AIzaSyB-tBe7PtYlD1hiZp16vb04b_mFRDE0YRc";
     public static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
-    public static final int PROXIMITY_RADIUS = 5000;
+    public static final int PROXIMITY_RADIUS = 50000;
     // The minimum distance to change Updates in meters
     public static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
     // The minimum time between updates in milliseconds
