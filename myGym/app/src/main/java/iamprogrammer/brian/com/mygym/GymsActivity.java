@@ -31,7 +31,9 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
@@ -115,6 +117,22 @@ public class GymsActivity extends AppCompatActivity implements OnMapReadyCallbac
         recyclerView.setLayoutManager(linearLayoutManager);
         CustomNearbyGyms customNearbyGyms = new CustomNearbyGyms(this, npNames, npCords, npLocation, npLocation);
         recyclerView.setAdapter(customNearbyGyms);
+    }
+
+    private void showOnMap(){
+        gmap.clear();
+
+        for( int i=0; i < npCords.size(); ++i ) {
+            String coords[] = npCords.get( i ).split(",");
+
+            MarkerOptions markerOptions = new MarkerOptions();
+            LatLng latLng = new LatLng(Double.parseDouble(coords[0]), Double.parseDouble(coords[1]));
+            markerOptions.position(latLng);
+            markerOptions.title(npNames.get(i));
+            markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.treadmill));
+
+            gmap.addMarker(markerOptions);
+        }
     }
 
     private void getLocationPermission() {
@@ -209,8 +227,6 @@ public class GymsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     public void parseLocationResult(JSONObject result) {
-        Toast.makeText( GymsActivity.this, result.toString(), Toast.LENGTH_SHORT ).show();
-
         try {
             JSONArray jsonArray = result.getJSONArray(RESULTS);
 
@@ -219,12 +235,12 @@ public class GymsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     JSONObject place = jsonArray.getJSONObject(i);
 
                     npNames.add(place.getString(NAME));
-                    npCords.add(Double.toString(place.getJSONObject(GEOMETRY).getJSONObject(LOCATION).getDouble(LATITUDE)) + "," +
-                            Double.toString(place.getJSONObject(GEOMETRY).getJSONObject(LOCATION).getDouble(LONGITUDE)));
-                    npLocation.add(place.getString(LOCATION));
+                    npCords.add(Double.toString(place.getJSONObject(GEOMETRY).getJSONObject(LOCATION).getDouble(LATITUDE)) + "," + Double.toString(place.getJSONObject(GEOMETRY).getJSONObject(LOCATION).getDouble(LONGITUDE)));
+                    npLocation.add("");
                     npVicinity.add(place.getString(VICINITY));
                 }
 
+                showOnMap();
                 showResults();
             } else if (result.getString(STATUS).equalsIgnoreCase(ZERO_RESULTS)) {
                 Toast.makeText(GymsActivity.this, "No gyms available", Toast.LENGTH_LONG).show();

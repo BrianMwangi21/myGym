@@ -23,7 +23,7 @@
                 android:id="@+id/gym_name"
                 android:text="Gym Name"
                 android:textColor="#000"
-                android:textSize="21dp"/>
+                android:textSize="18dp"/>
 
             <View
                 android:layout_width="fill_parent"
@@ -40,21 +40,33 @@
                 android:textColor="#d3d3d3"
                 android:textSize="12dp"/>
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/gym_location"
-                android:text="Location"
-                android:textColor="#000"
-                android:textSize="16dp"/>
+                android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/gym_vicinity"
-                android:text="Vicinity"
-                android:textColor="#000"
-                android:textSize="16dp"/>
+                <com.dd.processbutton.iml.ActionProcessButton
+                    android:id="@+id/button_showonmap"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="30px"
+                    android:text="Show on map"
+                    app:pb_colorNormal="#fff"
+                    android:textColor="#000"
+                    android:textSize="12sp"
+                    android:layout_marginRight="10dp"/>
+
+                <com.dd.processbutton.iml.ActionProcessButton
+                    android:id="@+id/button_booksession"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="30px"
+                    android:text="Book session"
+                    app:pb_colorNormal="#fff"
+                    android:textColor="#000"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
 
         </LinearLayout>
 

@@ -22,14 +22,12 @@ public class CustomNearbyGyms extends RecyclerView.Adapter<CustomNearbyGyms.MyVi
     ArrayList<String> npNames, npCords, npLocation, npVicinity;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView gymName, gymCoords, gymLocation, gymVicinity;
+        public TextView gymName, gymCoords;
 
         public MyViewHolder(View view) {
             super(view);
             gymName = view.findViewById(R.id.gym_name);
             gymCoords = view.findViewById(R.id.gym_coordinates);
-            gymLocation = view.findViewById(R.id.gym_location);
-            gymVicinity = view.findViewById(R.id.gym_vicinity);
         }
     }
 
@@ -52,8 +50,6 @@ public class CustomNearbyGyms extends RecyclerView.Adapter<CustomNearbyGyms.MyVi
     public void onBindViewHolder(CustomNearbyGyms.MyViewHolder holder, int position) {
         holder.gymName.setText( npNames.get(position) );
         holder.gymCoords.setText( npCords.get(position) );
-        holder.gymLocation.setText( npLocation.get(position) );
-        holder.gymVicinity.setText( npVicinity.get(position) );
     }
 
     @Override
