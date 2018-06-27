@@ -117,7 +117,7 @@
                 </GridLayout>
 
                 <com.dd.processbutton.iml.ActionProcessButton
-                    android:id="@+id/button_profile_save"
+                    android:id="@+id/button_session_save"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:layout_marginTop="30px"

@@ -69,7 +69,7 @@ public class CustomNearbyGyms extends RecyclerView.Adapter<CustomNearbyGyms.MyVi
         holder.showOnMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String coords[] = npCords.get( global_pos ).split(",");
+                String coords[] = npCords.get( global_pos - 1 ).split(",");
                 map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Double.parseDouble(coords[0]), Double.parseDouble(coords[1])), 15));
             }
         });
