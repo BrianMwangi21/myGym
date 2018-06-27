@@ -10,4 +10,5 @@
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="title_activity_gym">Map</string>
     <string name="title_activity_gyms">GymsActivity</string>
+    <string name="title_activity_sessions">Workout sessions</string>
 </resources>

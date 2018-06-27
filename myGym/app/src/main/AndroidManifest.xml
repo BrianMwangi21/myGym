@@ -69,6 +69,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="iamprogrammer.brian.com.mygym.MainActivity" />
         </activity>
+        <activity
+            android:name=".SessionsActivity"
+            android:label="@string/title_activity_sessions"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

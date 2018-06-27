@@ -71,6 +71,7 @@ public class GymsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private static final int DEFAULT_ZOOM = 15;
     private static final String TAG = GymsActivity.class.getSimpleName();
     private final LatLng mDefaultLocation = new LatLng(1.2921, 36.8219);
+    Bundle extras;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +81,9 @@ public class GymsActivity extends AppCompatActivity implements OnMapReadyCallbac
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Gyms");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        // Get bundle
+        extras = getIntent().getExtras();
 
         // What's needed
         // Needed manenos
@@ -115,7 +119,7 @@ public class GymsActivity extends AppCompatActivity implements OnMapReadyCallbac
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
-        CustomNearbyGyms customNearbyGyms = new CustomNearbyGyms(this, npNames, npCords, npLocation, npLocation);
+        CustomNearbyGyms customNearbyGyms = new CustomNearbyGyms(this, npNames, npCords, npLocation, npLocation, gmap, extras);
         recyclerView.setAdapter(customNearbyGyms);
     }
 
