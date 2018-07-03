@@ -19,7 +19,7 @@ import java.util.Calendar;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DatePicker extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+public class DatePickerTwo extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
     @NonNull
     @Override
@@ -36,7 +36,7 @@ public class DatePicker extends DialogFragment implements DatePickerDialog.OnDat
     @Override
     public void onDateSet(android.widget.DatePicker datePicker, int i, int i1, int i2) {
         // For signup
-        SignUpActivity activity = (SignUpActivity) getActivity();
+        SessionsActivity activity = (SessionsActivity) getActivity();
         activity.processDatePickerResult( i, i1, i2 );
     }
 }

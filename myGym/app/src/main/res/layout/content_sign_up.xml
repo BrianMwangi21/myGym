@@ -43,13 +43,27 @@
         android:inputType="textPassword"
         android:textColor="#000"/>
 
-    <EditText
-        android:id="@+id/edittext_dob"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="date"
-        android:hint="Date of birth : DD/MM/YYYY"
-        android:textColor="#000"/>
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="100px"
+            android:layout_height="100px"
+            android:src="@drawable/icon_calendar"
+            android:id="@+id/pickdate"/>
+
+        <EditText
+            android:id="@+id/edittext_dob"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="date"
+            android:hint="Date of birth"
+            android:editable="false"
+            android:textColor="#000"/>
+
+    </LinearLayout>
 
     <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"

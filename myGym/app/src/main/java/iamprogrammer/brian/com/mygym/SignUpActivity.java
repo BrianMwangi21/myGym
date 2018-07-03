@@ -1,12 +1,15 @@
 package iamprogrammer.brian.com.mygym;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
@@ -22,6 +25,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     String gender = "male";
     EditText usernameET, emailET, passET, dobET;
+    ImageView pickDate;
     ActionProcessButton signUpBtn;
     DatabaseReference mDatabase;
 
@@ -35,6 +39,13 @@ public class SignUpActivity extends AppCompatActivity {
         emailET = findViewById(R.id.edittext_email_signup);
         passET = findViewById(R.id.edittext_password_signup);
         dobET = findViewById(R.id.edittext_dob);
+        pickDate = findViewById(R.id.pickdate);
+        pickDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDateFragment();
+            }
+        });
         signUpBtn = findViewById(R.id.button_signup);
         signUpBtn.setMode(ActionProcessButton.Mode.ENDLESS);
         signUpBtn.setOnClickListener(new View.OnClickListener() {
@@ -130,5 +141,19 @@ public class SignUpActivity extends AppCompatActivity {
         });
 
         return exists;
+    }
+
+    public void showDateFragment() {
+        DialogFragment newFragment = new DatePicker();
+        newFragment.show( getSupportFragmentManager(), "DatePicker" );
+    }
+
+    public void processDatePickerResult(int year, int month, int day) {
+        String month_string = Integer.toString(month + 1);
+        String day_string = Integer.toString(day);
+        String year_string = Integer.toString(year);
+        // Assign the concatenated strings to dateMessage.
+        String dateMessage = (month_string + "/" + day_string + "/" + year_string);
+        dobET.setText( dateMessage );
     }
 }

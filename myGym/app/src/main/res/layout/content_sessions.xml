@@ -64,13 +64,26 @@
                         android:text="Date of workout"
                         android:textSize="15dp" />
 
-                    <EditText
-                        android:id="@+id/sessions_date"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="#000"
-                        android:shadowColor="#000"
-                        android:inputType="date" />
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="100px"
+                            android:layout_height="100px"
+                            android:src="@drawable/icon_calendar"
+                            android:id="@+id/pickdate"/>
+
+                        <EditText
+                            android:id="@+id/sessions_date"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="date"
+                            android:editable="false"
+                            android:textColor="#000"/>
+
+                    </LinearLayout>
 
                 </GridLayout>
 

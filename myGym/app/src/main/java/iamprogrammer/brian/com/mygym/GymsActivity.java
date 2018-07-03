@@ -212,7 +212,7 @@ public class GymsActivity extends AppCompatActivity implements OnMapReadyCallbac
         googlePlacesUrl.append("&sensor=true");
         googlePlacesUrl.append("&key=" + GOOGLE_BROWSER_API_KEY);
 
-        RequestQueue queue = Volley.newRequestQueue(this);
+        RequestQueue queue = Volley.newRequestQueue(this );
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, googlePlacesUrl.toString(), null,
                 new Response.Listener<JSONObject>() {
                     @Override

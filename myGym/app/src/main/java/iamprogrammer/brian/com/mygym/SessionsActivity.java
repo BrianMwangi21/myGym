@@ -7,12 +7,14 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -25,13 +27,14 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Date;
 
-public class SessionsActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+public class SessionsActivity extends AppCompatActivity  {
 
     Bundle extras;
     String email;
     User user;
     DatabaseReference mDatabase;
     EditText locationET, dateET, repsET;
+    ImageView datePicker;
     ActionProcessButton saveWorkout;
     Spinner exerciseSpinner;
     String exercises[] = {"Aerobic exercise", "Breathing exercise", "Strength exercise", "Stretching exercise"};
@@ -54,6 +57,13 @@ public class SessionsActivity extends AppCompatActivity implements DatePickerDia
         locationET = findViewById(R.id.session_location);
         locationET.setText( extras.getString("gym") );
         dateET = findViewById(R.id.sessions_date);
+        datePicker = findViewById(R.id.pickdate);
+        datePicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDateFragment();
+            }
+        });
         repsET = findViewById(R.id.session_reps);
 
         exerciseSpinner = findViewById(R.id.sessions_exercise);
@@ -120,6 +130,10 @@ public class SessionsActivity extends AppCompatActivity implements DatePickerDia
                     if( databaseError == null ) {
                         saveWorkout.setProgress(100);
                         Toast.makeText( SessionsActivity.this, "Done", Toast.LENGTH_SHORT ).show();
+
+                        Intent intent = new Intent(SessionsActivity.this, MainActivity.class );
+                        intent.putExtras( extras );
+                        startActivity( intent );
                     }else {
                         Toast.makeText( SessionsActivity.this, "Something went wrong! Try again", Toast.LENGTH_SHORT ).show();
                         saveWorkout.setProgress(0);
@@ -131,9 +145,18 @@ public class SessionsActivity extends AppCompatActivity implements DatePickerDia
         }
     }
 
-    @Override
-    public void onDateSet(android.widget.DatePicker datePicker, int i, int i1, int i2) {
-        dateET.setText(i + "/" + i1 + "/" + i2);
+    public void showDateFragment() {
+        DialogFragment newFragment = new DatePickerTwo();
+        newFragment.show( getSupportFragmentManager(), "DatePicker" );
+    }
+
+    public void processDatePickerResult(int year, int month, int day) {
+        String month_string = Integer.toString(month + 1);
+        String day_string = Integer.toString(day);
+        String year_string = Integer.toString(year);
+        // Assign the concatenated strings to dateMessage.
+        String dateMessage = (month_string + "/" + day_string + "/" + year_string);
+        dateET.setText( dateMessage );
     }
 
 }

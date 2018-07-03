@@ -26,6 +26,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity
     Bundle extras;
     DatabaseReference mDatabase;
     User user;
+    ArrayList<Session> sessions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +67,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void getUserData( String email ) {
+        // get user info
         mDatabase = FirebaseDatabase.getInstance().getReference("users");
         mDatabase.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -75,6 +78,30 @@ public class MainActivity extends AppCompatActivity
 
                         // Populate the data
                         mainTitle.setText( user.getUsername() );
+                    }
+                }else {
+                    Toast.makeText( MainActivity.this, "Email not found", Toast.LENGTH_SHORT ).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText( MainActivity.this, "Ref cancelled", Toast.LENGTH_SHORT ).show();
+            }
+        });
+
+        // get Session info
+        sessions = new ArrayList<>();
+        mDatabase = FirebaseDatabase.getInstance().getReference("sessions");
+        mDatabase.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if( dataSnapshot.exists() ) {
+                    for( DataSnapshot childSnapshot : dataSnapshot.getChildren() ) {
+                        Session session =  childSnapshot.getValue(Session.class);
+
+                        // Populate the data
+                        Toast.makeText( MainActivity.this, ">> " + session.getUid(), Toast.LENGTH_SHORT ).show();
                     }
                 }else {
                     Toast.makeText( MainActivity.this, "Email not found", Toast.LENGTH_SHORT ).show();
