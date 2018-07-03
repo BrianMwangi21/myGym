@@ -142,17 +142,16 @@ public class MainActivity extends AppCompatActivity
             intent.putExtras( extras );
             startActivity( intent );
         } else if (id == R.id.nav_sessions) {
-
+            // Go to sessions
+            Intent intent = new Intent( MainActivity.this, AllSessionsActivity.class );
+            intent.putExtras( extras );
+            startActivity( intent );
         } else if (id == R.id.nav_profile) {
             // Go to profile
             Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
             intent.putExtras( extras );
             startActivity( intent );
         } else if (id == R.id.nav_settings) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_feedback) {
 
         }
 

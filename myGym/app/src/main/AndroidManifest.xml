@@ -72,7 +72,16 @@
         <activity
             android:name=".SessionsActivity"
             android:label="@string/title_activity_sessions"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".AllSessionsActivity"
+            android:label="@string/title_activity_all_sessions"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="iamprogrammer.brian.com.mygym.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

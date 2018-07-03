@@ -22,17 +22,4 @@
             android:title="Settings" />
     </group>
 
-    <item android:title="More">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
-            <item
-                android:id="@+id/nav_feedback"
-                android:icon="@drawable/icon_feedback"
-                android:title="Send feedback" />
-        </menu>
-    </item>
-
 </menu>
