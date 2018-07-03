@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     TextView mainTitle, subTitle;
+    RecyclerView recyclerView;
     Bundle extras;
     DatabaseReference mDatabase;
     User user;
@@ -58,6 +59,9 @@ public class MainActivity extends AppCompatActivity
 
         // Get bundle
         extras = getIntent().getExtras();
+
+        // Init sessions
+        sessions = new ArrayList<>();
 
         // Get views
         mainTitle = headerView.findViewById(R.id.navbar_title);
@@ -90,8 +94,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        // get Session info
-        sessions = new ArrayList<>();
+
         mDatabase = FirebaseDatabase.getInstance().getReference("sessions");
         mDatabase.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -99,10 +102,10 @@ public class MainActivity extends AppCompatActivity
                 if( dataSnapshot.exists() ) {
                     for( DataSnapshot childSnapshot : dataSnapshot.getChildren() ) {
                         Session session =  childSnapshot.getValue(Session.class);
-
-                        // Populate the data
-                        Toast.makeText( MainActivity.this, ">> " + session.getUid(), Toast.LENGTH_SHORT ).show();
+                        sessions.add( session );
                     }
+
+                    showUpcomingSessions();
                 }else {
                     Toast.makeText( MainActivity.this, "Email not found", Toast.LENGTH_SHORT ).show();
                 }
@@ -156,5 +159,14 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public  void showUpcomingSessions() {
+        recyclerView = findViewById(R.id.mainRecyclerView);
+        recyclerView.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        CustomSessions customSessions = new CustomSessions( this, sessions, extras );
+        recyclerView.setAdapter(customSessions);
     }
 }
