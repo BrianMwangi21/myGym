@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:paddingTop="20px"
         android:id="@+id/edittext_email_login"
-        android:hint="Email address"
+        android:hint="@string/enter_email_address"
         android:inputType="textEmailAddress"
         android:textColor="#000"/>
 
@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:paddingTop="20px"
         android:id="@+id/edittext_password_login"
-        android:hint="Password"
+        android:hint="@string/enter_password"
         android:inputType="textPassword"
         android:textColor="#000"/>
 
@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_marginTop="30px"
-        android:text="log in"
+        android:text="@string/log_in"
         app:pb_colorNormal="#fff"
         android:textColor="#000"
         android:textSize="12sp" />

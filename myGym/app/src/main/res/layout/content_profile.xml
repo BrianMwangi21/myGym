@@ -38,7 +38,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Username"
+                        android:text="@string/enter_username"
                         android:textSize="15dp" />
 
                     <EditText
@@ -60,7 +60,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Date of birth"
+                        android:text="@string/enter_date_of_birth"
                         android:textSize="15dp" />
 
                     <EditText
@@ -82,7 +82,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Home (preferred workout location)"
+                        android:text="@string/preferred_workout_location"
                         android:textSize="15dp" />
 
                     <EditText
@@ -104,7 +104,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Current weight (in kgs)"
+                        android:text="@string/current_weight"
                         android:textSize="15dp" />
 
                     <EditText
@@ -126,7 +126,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Target weight (in kgs)"
+                        android:text="@string/target_weight"
                         android:textSize="15dp" />
 
                     <EditText
@@ -144,7 +144,7 @@
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:layout_marginTop="30px"
-                    android:text="SAVE CHANGES"
+                    android:text="@string/save_changes"
                     app:pb_colorNormal="#fff"
                     android:textColor="#000"
                     android:textSize="12sp" />

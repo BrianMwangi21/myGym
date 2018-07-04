@@ -50,7 +50,7 @@
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:layout_marginTop="30px"
-                    android:text="Show on map"
+                    android:text="@string/show_on_map"
                     app:pb_colorNormal="#fff"
                     android:textColor="#000"
                     android:textSize="12sp"
@@ -61,7 +61,7 @@
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:layout_marginTop="30px"
-                    android:text="Book session"
+                    android:text="@string/book_session"
                     app:pb_colorNormal="#fff"
                     android:textColor="#000"
                     android:textSize="12sp" />

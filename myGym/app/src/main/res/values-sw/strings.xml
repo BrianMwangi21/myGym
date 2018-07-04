@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">myGym</string>
+    <string name="action_settings">Mipangilio</string>
+    <string name="title_activity_sign_up">SignUpActivity</string>
+    <string name="title_activity_log_in">LogInActivity</string>
+    <string name="title_activity_main">Nyumbani</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="title_activity_profile">Maelezi mafupi</string>
+    <string name="title_activity_gyms">Maeneo ya zoezi</string>
+    <string name="title_activity_sessions">Vipindi vya mazoezi</string>
+    <string name="title_activity_settings">Mipangilio</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_all_sessions">Vipindi</string>
+    <string name="enter_email_address">Barua pepe</string>
+    <string name="enter_password">Nenosiri</string>
+    <string name="enter_username">Jina la mtumiaji</string>
+    <string name="enter_date_of_birth">Tarehe ya kuzaliwa</string>
+    <string name="option_male">Kiume</string>
+    <string name="option_female">Kike</string>
+    <string name="sign_up">sai-ni</string>
+    <string name="log_in">ingia</string>
+    <string name="preferred_workout_location">Nyumba (iliyopendekezwa pa kazi)</string>
+    <string name="current_weight">Uzito wa sasa (katika kgs)</string>
+    <string name="target_weight">Uzito wa lengo (katika kgs)</string>
+    <string name="save_changes">HIFADHI MABADILIKO</string>
+    <string name="location">Eneo</string>
+    <string name="date_of_workout">Siku ya zoezi</string>
+    <string name="exercise_type">Aina ya zoezi</string>
+    <string name="number_of_reps">Idadi ya reps</string>
+    <string name="save_session">Hifadhi kipindi</string>
+    <string name="book_session">Hifadhi kipindi</string>
+    <string name="show_on_map">Onyesha kwenye ramani</string>
+    <string name="option_english">Kingereza</string>
+    <string name="option_kiswahili">Kiswahili</string>
+    <string name="choose_language">Chagua lugha</string>
+    <string name="gyms">Maeneo ya zoezi</string>
+    <string name="sessions">Vipindi</string>
+    <string name="profile">Maelezo mafupi</string>
+    <string name="settings">Mipangilio</string>
+    <string name="upcoming_sessions">Mazoezi yajayo</string>
+</resources>

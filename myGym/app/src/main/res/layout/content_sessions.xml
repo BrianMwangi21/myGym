@@ -38,7 +38,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Location"
+                        android:text="@string/location"
                         android:textSize="15dp" />
 
                     <EditText
@@ -61,7 +61,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Date of workout"
+                        android:text="@string/date_of_workout"
                         android:textSize="15dp" />
 
                     <LinearLayout
@@ -96,7 +96,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Exercise type"
+                        android:text="@string/exercise_type"
                         android:textSize="15dp" />
 
                     <Spinner
@@ -116,7 +116,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Number of reps"
+                        android:text="@string/number_of_reps"
                         android:textSize="15dp" />
 
                     <EditText
@@ -134,7 +134,7 @@
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:layout_marginTop="30px"
-                    android:text="SAVE SESSION"
+                    android:text="@string/save_session"
                     app:pb_colorNormal="#fff"
                     android:textColor="#000"
                     android:textSize="12sp" />

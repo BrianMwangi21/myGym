@@ -32,7 +32,7 @@ public class AllSessionsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_all_sessions);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Sessions");
+        getSupportActionBar().setTitle(R.string.title_activity_sessions);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Get intent

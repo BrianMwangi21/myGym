@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Home");
+        getSupportActionBar().setTitle(R.string.title_activity_main);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -152,7 +152,9 @@ public class MainActivity extends AppCompatActivity
             intent.putExtras( extras );
             startActivity( intent );
         } else if (id == R.id.nav_settings) {
-
+            Intent intent = new Intent( MainActivity.this, SettingsActivity.class );
+            intent.putExtras( extras );
+            startActivity( intent );
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -24,7 +24,7 @@
         <com.dd.processbutton.iml.ActionProcessButton
             android:id="@+id/button_login_splash"
             android:layout_columnWeight="1"
-            android:text="log in"
+            android:text="@string/log_in"
             app:pb_colorNormal="#fff"
             android:textColor="#000"
             android:textSize="12sp" />
@@ -32,7 +32,7 @@
         <com.dd.processbutton.iml.ActionProcessButton
             android:id="@+id/button_signup_splash"
             android:layout_columnWeight="1"
-            android:text="sign up"
+            android:text="@string/sign_up"
             app:pb_colorNormal="#fff"
             android:textColor="#000"
             android:textSize="12sp" />
