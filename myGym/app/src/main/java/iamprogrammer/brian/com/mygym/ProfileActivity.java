@@ -43,7 +43,6 @@ public class ProfileActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.title_activity_profile);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Get extras
         extras = getIntent().getExtras();

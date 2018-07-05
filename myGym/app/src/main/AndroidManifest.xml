@@ -19,7 +19,8 @@
         <activity
             android:name=".SplashActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,11 +30,13 @@
         <activity
             android:name=".SignUpActivity"
             android:label="@string/title_activity_sign_up"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:noHistory="true"/>
         <activity
             android:name=".LogInActivity"
             android:label="@string/title_activity_log_in"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:noHistory="true"/>
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
@@ -41,11 +44,7 @@
         <activity
             android:name=".ProfileActivity"
             android:label="@string/title_activity_profile"
-            android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="iamprogrammer.brian.com.mygym.MainActivity" />
         </activity>
 
         <!--
@@ -63,11 +62,7 @@
         <activity
             android:name=".GymsActivity"
             android:label="@string/title_activity_gyms"
-            android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="iamprogrammer.brian.com.mygym.MainActivity" />
         </activity>
         <activity
             android:name=".SessionsActivity"
@@ -76,20 +71,12 @@
         <activity
             android:name=".AllSessionsActivity"
             android:label="@string/title_activity_all_sessions"
-            android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="iamprogrammer.brian.com.mygym.MainActivity" />
         </activity>
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="iamprogrammer.brian.com.mygym.MainActivity" />
         </activity>
     </application>
 

@@ -80,7 +80,6 @@ public class GymsActivity extends AppCompatActivity implements OnMapReadyCallbac
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.title_activity_gyms);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Get bundle
         extras = getIntent().getExtras();

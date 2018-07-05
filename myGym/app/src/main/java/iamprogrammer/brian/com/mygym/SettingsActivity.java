@@ -31,7 +31,6 @@ public class SettingsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.title_activity_settings);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         extras = getIntent().getExtras();
 
