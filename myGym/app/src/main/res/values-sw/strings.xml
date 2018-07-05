@@ -42,4 +42,6 @@
     <string name="profile">Maelezo mafupi</string>
     <string name="settings">Mipangilio</string>
     <string name="upcoming_sessions">Mazoezi yajayo</string>
+    <string name="instructors">Walimu wa mazoezi</string>
+    <string name="title_activity_instructor">Walimu wa mazoezi</string>
 </resources>

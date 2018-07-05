@@ -151,6 +151,11 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
             intent.putExtras( extras );
             startActivity( intent );
+        } else if (id == R.id.nav_instructor) {
+            // Go to profile
+            Intent intent = new Intent(MainActivity.this, InstructorActivity.class);
+            intent.putExtras( extras );
+            startActivity( intent );
         } else if (id == R.id.nav_settings) {
             Intent intent = new Intent( MainActivity.this, SettingsActivity.class );
             intent.putExtras( extras );

@@ -9,6 +9,10 @@
             android:icon="@drawable/icon_treadmill"
             android:title="@string/gyms" />
         <item
+            android:id="@+id/nav_instructor"
+            android:icon="@drawable/icon_instructor"
+            android:title="@string/instructors" />
+        <item
             android:id="@+id/nav_sessions"
             android:icon="@drawable/icon_sessions"
             android:title="@string/sessions" />
