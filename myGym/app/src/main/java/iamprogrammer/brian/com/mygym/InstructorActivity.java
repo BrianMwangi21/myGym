@@ -58,7 +58,6 @@ public class InstructorActivity extends AppCompatActivity {
                         iPhone.add( instructor.getPhonenumber() );
                     }
 
-                    Toast.makeText( InstructorActivity.this, iNames.toString(), Toast.LENGTH_SHORT ).show();
                     showInstructors();
                 }else {
                     Toast.makeText( InstructorActivity.this, "Not found", Toast.LENGTH_SHORT ).show();
