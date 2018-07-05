@@ -20,8 +20,7 @@ public class InstructorActivity extends AppCompatActivity {
 
     Bundle extras;
     RecyclerView recyclerView;
-    ArrayList<Instructor> instructors;
-    ArrayList<Integer> imagesRes;
+    ArrayList<String> iNames, iGender, iEmail, iPhone;
     DatabaseReference mDatabase;
     int images[] = { R.drawable.trainer1, R.drawable.trainer2, R.drawable.trainer3 };
 
@@ -37,17 +36,15 @@ public class InstructorActivity extends AppCompatActivity {
         extras = getIntent().getExtras();
 
         // Init instructors
-        instructors = new ArrayList<>();
-        imagesRes = new ArrayList<>();
+        iNames = new ArrayList<>();
+        iGender = new ArrayList<>();
+        iEmail = new ArrayList<>();
+        iPhone = new ArrayList<>();
 
         getInstructors();
     }
 
     public void getInstructors() {
-        for( int i = 0; i < 3; ++i ) {
-            imagesRes.add( images[i] );
-        }
-
         mDatabase = FirebaseDatabase.getInstance().getReference("instructors");
         mDatabase.orderByChild("email").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -55,9 +52,13 @@ public class InstructorActivity extends AppCompatActivity {
                 if( dataSnapshot.exists() ) {
                     for( DataSnapshot childSnapshot : dataSnapshot.getChildren() ) {
                         Instructor instructor = childSnapshot.getValue(Instructor.class);
-                        instructors.add(instructor);
+                        iNames.add( instructor.getName() );
+                        iGender.add( instructor.getGender() );
+                        iEmail.add( instructor.getEmail() );
+                        iPhone.add( instructor.getPhonenumber() );
                     }
 
+                    Toast.makeText( InstructorActivity.this, iNames.toString(), Toast.LENGTH_SHORT ).show();
                     showInstructors();
                 }else {
                     Toast.makeText( InstructorActivity.this, "Not found", Toast.LENGTH_SHORT ).show();
@@ -76,7 +77,7 @@ public class InstructorActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
-        CustomInstructors customInstructors = new CustomInstructors( instructors, imagesRes );
+        CustomInstructors customInstructors = new CustomInstructors( images, iNames, iGender, iEmail, iPhone );
         recyclerView.setAdapter(customInstructors);
     }
 

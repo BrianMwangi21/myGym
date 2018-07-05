@@ -24,7 +24,6 @@
                     <ImageView
                         android:layout_height="200px"
                         android:layout_width="200px"
-                        android:src="@drawable/trainer1"
                         android:scaleType="centerCrop"
                         android:id="@+id/trainer_image"/>
 
